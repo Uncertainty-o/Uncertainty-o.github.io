@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Uncertainty-o: One Model-agnostic Framework for Unveiling Epistemic Uncertainty in Large Multimodal Models">
+  <meta name="keywords" content="Uncertainty-o, LMM, Uncertainty, Hallucination Detection">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uncertainty-o: One Model-agnostic Framework for Unveiling Epistemic Uncertainty in Large Multimodal Models</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/uncertainty.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://ruiyang-061x.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://vl-uncertainty.github.io/">
+            VL-Uncertainty
+          </a>
+        </div>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/Ruiyang-061X/UA3D">
+            UA3D
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Uncertainty-o: One Model-agnostic Framework for Unveiling Epistemic Uncertainty in Large Multimodal Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ruiyang-061x.github.io/">Ruiyang Zhang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://huzhangcs.github.io/">Hu Zhang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://haofei.vip/">Hao Fei</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.zdzheng.xyz/">Zhedong Zheng</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Macau,</span>
+            <span class="author-block"><sup>2</sup>CSIRO Data61,</span>
+            <span class="author-block"><sup>3</sup>NUS</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Ruiyang-061X/Uncertainty-o"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            <!-- <span class="dnerf">Uncertainty-o</span> -->
+            Large Multimodal Models (LMMs), characterized by diverse modalities, architectures, and capabilities, are rapidly emerging. In this paper, we aim to address three key questions: (1) Can we unveil the uncertainty of LMMs in a model-agnostic manner, regardless of the modalities, architectures, and capabilities involved? (2) Complexity of multimodal prompts leads to confusion and uncertainty in LMMs, how can we model this relationship? (3) LMM uncertainty ultimately reflects in multimodal responses, how can we mine uncertainty from these multimodal responses? To answer these questions, we propose <span class="dnerf">Uncertainty-o</span>: (1) <span class="dnerf">Uncertainty-o</span> is one model-agnostic framework for unveiling uncertainty in LMMs, independent of their modalities, architectures, and capabilities. (2) We empirically explore multimodal prompt perturbation for unveiling LMM uncertainty, providing our insights and findings. (3) We propose multimodal semantic uncertainty, enabling quantification of uncertainty from multimodal responses. Experiments with 18 benchmarks across various modalities and 10 LMMs (open- and closed-source) validate the efficacy of <span class="dnerf">Uncertainty-o</span> in reliably estimating LMM uncertainty, thereby facilitating various downstream tasks, including hallucination detection, hallucination mitigation, and uncertainty-aware Chain-of-Thought (CoT).
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Motivation. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/overview.png" width=100%>
+          <p>
+            <b>Comparison with Previous Works and Overview of <span class="dnerf">Uncertainty-o</span>.</b> <span class="dnerf">Uncertainty-o</span> captures uncertainty in large multimodal models in a model-agnostic manner. It achieves reliable uncertainty estimation via multimodal prompt perturbation. Harnessing multimodal semantic uncertainty, which maps multimodal answer into text semantic space, we enable mining uncertainty from multimodal responses.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Motivation. -->
+
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/method.png" width=100%>
+          <p>
+            <b>Pipeline of Our <span class="dnerf">Uncertainty-o</span>.</b> Given a multimodal prompt and large multimodal models, we perform multimodal prompt perturbation to generate diverse responses. Due to the inherent epistemic uncertainty of these models under perturbation, varied responses are typically obtained. To quantify this uncertainty, we apply semantic clustering on the collected responses and compute their entropy. Specifically, responses are grouped into semantically similar clusters, and the entropy across these clusters is calculated as the final uncertainty measure. Higher entropy indicates greater variability in responses, suggesting lower confidence, while lower entropy reflects higher consistency and thus higher confidence.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Method. -->
+
+    <!-- Comparison with State-of-the-arts. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comprehension Hallucination Detection Results</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/comprehension.png" width=100%>
+          <p>
+            <b>Comprehension Hallucination Detection Results.</b> <span class="dnerf">Uncertainty-o</span> consistently outperforms strong baselines by a clear margin in LMM comprehension hallucination detection. For LMMs, We utilize InternVL, VideoLLaMA, OneLLM, PointLLM for image, video, audio, point cloud comprehension. The best results are in bold, and the second-best results are underlined.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Comparison with State-of-the-arts. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Hallucination Detection for Closed-Source LMMs</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/close.png" width=100%>
+          <p>
+            <b>Hallucination Detection for Closed-Source LMMs.</b> We leverage GPT4o for image comprehension, and Qwen-VL-Max for video question answering, respectively.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Hallucination Detection for Safety-Critic Tasks</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/safety.png" width=100%>
+          <p>
+            <b>Hallucination Detection for Safety-Critic Tasks.</b> We harness MIMICCXR benchmark for medical image diagnosis, and OpenEQA benchmark for video embodied QA.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Generation Hallucination Detection Results</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/generation.png" width=100%>
+          <p>
+            <b>Generation Hallucination Detection Results.</b> We utilize StableDiffusion, VideoFusion, AnyGPT, RGB2point for image, video, audio, point cloud generation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Hallucination Mitigation Results</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/comprehension.png" width=100%>
+          <p>
+            <b>Hallucination Mitigation Results.</b> Our uncertainty-guided revision effectively mitigates answer hallucination.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Uncertainty-Aware Chain-of-Thought Results</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/cot.png" width=100%>
+          <p>
+            <b>Uncertainty-Aware Chain-of-Thought Results.</b> Our estimated uncertainty enrich reasoning context, facilitating more thorough thinking process. We report average reasoning steps.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Qualitative Analysis. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Empirical Comparison of Different Prompt Perturbations</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/empirical.png" width=100%>
+          <p>
+            <b>Empirical Comparison of Different Prompt Perturbations.</b> On average, semantic-preserving perturbations are more effective for eliciting LMM uncertainty than semantic-altering ones. Results from comprehension hallucination detection for video, audio, point.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Qualitative Analysis. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Uncertainty-Aware Chain-of-Thought Results</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/cot.png" width=100%>
+          <p>
+            <b>Uncertainty-Aware Chain-of-Thought Results.</b> Our estimated uncertainty enrich reasoning context, facilitating more thorough thinking process. We report average reasoning steps.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Reliability of Our Estimated Uncertainty</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/reliability.png" width=100%>
+          <p>
+            <b>Reliability of Our Estimated Uncertainty.</b> From comparison with previous methods, we observe that: (1) Compared to Confidence Elicitation, <span class="dnerf">Uncertainty-o</span> effectively avoids the over-confidence problem, which inaccurately assigns low uncertainty (or high confidence) to hallucinatory responses. (2) Compared to Semantic Entropy, <span class="dnerf">Uncertainty-o</span> provides more reliable uncertainty estimation, e.g., the uncertainty is more closely aligned with the error rate in each bin. Results from OneLLM on ClothoV2.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Qualitative Results of Successful Hallucination Detection</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/qualitative_case.png" width=100%>
+          <p>
+            <b>Qualitative Results of Successful Hallucination Detection.</b> <span class="dnerf">Uncertainty-o</span> is proficient at accurately detecting both compre- hension and generation hallucinations due to the reliablely estimated uncertainty. Cases from Objaverse and Flickr.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    
+  
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @article{zhang2025uncertainty,
+        title={<span class="dnerf">Uncertainty-o</span>: One Model-agnostic Framework for Unveiling Epistemic Uncertainty in Large Multimodal Models},
+        author={Zhang, Ruiyang and Zhang, Hu and Hao, Fei and Zheng, Zhedong},
+        year={2025}
+      }
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>. Thanks for website code of <ahref="https://github.com/nerfies/nerfies.github.io">Nerfies</a>!
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
